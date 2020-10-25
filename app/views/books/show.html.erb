@@ -1,0 +1,72 @@
+
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+      <h2>User info</h2>
+        <table class="table">
+          <tbody>
+            <tr><%= attachment_image_tag @book.user, :profile_image, fallback: "no-image.png", size:'100x100' %></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @book.user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+               <th><%= @book.user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to '', edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3">
+          <h2>New book</h2>
+          <%= form_with model: @list, local:true do |f| %>
+          <div class="box">
+            <label for="book_title">Title</label><br>
+            <%= f.text_field :title %>
+          </div>
+          <div class="box">
+            <label for="book_opinion">Opinion</label><br>
+            <%= f.text_area :body %>
+          </div>
+          <div class="box">
+            <%= f.submit 'Create Book' %>
+          </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-9">
+          <h2>Book detail</h2>
+          <table class="table table-hover table-inverse">
+            <tr></tr>
+            <div class="table">
+              <tbody>
+              <tr>
+                <td><%= attachment_image_tag @book.user,  :profile_image, fallback: "no-image.png", size:'40x40' %>
+                 <br><%= link_to user_path(@book.user) do %><%= @book.user.name %><% end %></td>
+                <td><%= @book.title %></td>
+                <td><%= @book.body %></td>
+                <% if @book.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_book_path(@book),class: 'btn-primary mr-3' %></td>
+                <td><%= link_to 'Destroy', book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？？" %></td>
+                <% end %>
+              </tr>
+              <tbody>
+            </div>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

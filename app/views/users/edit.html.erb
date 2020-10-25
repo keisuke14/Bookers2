@@ -1,0 +1,35 @@
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <h2 class="">User info</h2>
+        <% if @user.errors.any? %>
+        <h1>error</h1>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+           <% end %>
+        <% end %>
+        <%= form_with model: @user, local:true do |f| %>
+        <div class="box">
+          <label for="user_name">Name</label><br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">Image
+            <%= f.attachment_field :profile_image %>
+          </div>
+        </div>
+    
+        <div class="box">
+          <label for="user_body">Introduction</label>
+            <%= f.text_area :introduction %>
+        </div>
+        <div class="box">
+          <%= f.submit 'Update User' %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

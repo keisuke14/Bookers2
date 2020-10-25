@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+  <header>
+
+    <div class="container">
+      <span class="title">Bookers</span>
+          <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+            <% if user_signed_in? %>
+              <div class="sidemenu">
+                <%= link_to user_path(current_user) do %>
+                  <span class="glyphicon glyphicon-home" aria-hidden="true">Home </span>
+                <% end %>
+              </div>
+              <div class="sidemenu">
+                <%= link_to users_path do %>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true">Users  </span>
+                  <% end %>
+              </div>
+              <div class="sidemenu">
+                <%= link_to books_path do %>
+                  <span class="glyphicon glyphicon-book" aria-hidden="true">Books  </span>
+                <% end %>
+              </div>
+              <div class="sidemenu">
+                  <%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-share' %>
+              </div>
+              <% else %>
+              <div class="sidemenu">
+                <%= link_to "Home", root_path, class: "glyphicon glyphicon-home" %>
+                 <!-- <span class="glyphicon glyphicon-home" aria-hidden="true">Home  </span>-->
+              </div>
+              <div class="sidemenu">
+              <%= link_to "About",  home_about_path, class: "glyphicon glyphicon-link" %>
+              </div>
+              <div class="sidemenu">
+                 <%= link_to "sign up", new_user_registration_path, class: "glyphicon glyphicon-edit" %>
+              </div>
+              <div class="sidemenu">
+                <%= link_to "login", user_session_path, class: "glyphicon glyphicon-log-in" %>
+              </div>
+            <% end %>
+          </ul>
+
+
+        </div>
+      </div>
+    </header>
+
+
+  <body>
+     <div class="container">
+        <% if flash[:notice] %>
+        <div class="notification is-info">
+          <p class="notice"><%= notice %></p>
+        </div>
+        <% end %>
+
+        <% if flash[:alert] %>
+        <div class="notification is-danger">
+          <p class="alert"><%= alert %></p>
+        </div>
+        <% end %>
+      </body>
+    <%= yield %>
+</body>
+</html>
