@@ -1,32 +1,46 @@
-
-<body>
-  <div class="container">
-    <h2 class="">User info</h2>
-    <% if @user.errors.any? %>
-     <h3><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
-    <% @user.errors.full_messages.each do |message| %>
+  <body>
+    <div class="container">
+      <h2>
+        User info
+      </h2>
+        <% if @user.errors.any? %>
+      <h3>
+        <%= @user.errors.count %>errors prohibited this obj from being saved:
+      </h3>
+        <% @user.errors.full_messages.each do |message| %>
       <ul>
         <li><%= message %></li>
       </ul>
+        <% end %>
       <% end %>
-    <% end %>
-    <%= form_with model: @user, local:true do |f| %>
-    <div class="box">
-      <label for="user_name">Name</label><br>
-      <%= f.text_field :name %>
+      <%= form_with model: @user, local:true do |f| %>
+        <div class="box">
+          <label for="user_name">Name</label>
+          <%= f.text_field :name %>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">Image
+            <%= f.attachment_field :profile_image %>
+          </div>
+        </div>
+        <div class="box">
+          <label for="user_body">Introduction</label>
+          <%= f.text_area :introduction %>
+        </div>
+        <div class="box">
+          <%= f.submit 'Update User' %>
+        </div>
+      <% end %>
     </div>
-    <div class="row">
-      <div class="col-sm-12">Image
-        <%= f.attachment_field :profile_image %>
-      </div>
-    </div>
-    <div class="box">
-      <label for="user_body">Introduction</label>
-        <%= f.text_area :introduction %>
-    </div>
-    <div class="box">
-      <%= f.submit 'Update User' %>
-    </div>
-    <% end %>
   </div>
-</body>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-9">
+            CopyRight Infratop.inc
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
